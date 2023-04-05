@@ -225,6 +225,30 @@ source/map.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/map.cpp.s
 .PHONY : source/map.cpp.s
 
+source/shader.o: source/shader.cpp.o
+.PHONY : source/shader.o
+
+# target to build an object file
+source/shader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/shader.cpp.o
+.PHONY : source/shader.cpp.o
+
+source/shader.i: source/shader.cpp.i
+.PHONY : source/shader.i
+
+# target to preprocess a source file
+source/shader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/shader.cpp.i
+.PHONY : source/shader.cpp.i
+
+source/shader.s: source/shader.cpp.s
+.PHONY : source/shader.s
+
+# target to generate assembly for a file
+source/shader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/shader.cpp.s
+.PHONY : source/shader.cpp.s
+
 source/snake.o: source/snake.cpp.o
 .PHONY : source/snake.o
 
@@ -270,6 +294,9 @@ help:
 	@echo "... source/map.o"
 	@echo "... source/map.i"
 	@echo "... source/map.s"
+	@echo "... source/shader.o"
+	@echo "... source/shader.i"
+	@echo "... source/shader.s"
 	@echo "... source/snake.o"
 	@echo "... source/snake.i"
 	@echo "... source/snake.s"

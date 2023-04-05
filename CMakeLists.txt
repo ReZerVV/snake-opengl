@@ -8,6 +8,7 @@ add_executable(snake
 	source/food.cpp
 	source/map.cpp
 	source/controller.cpp
+	source/shader.cpp
 )
 
 find_package(OpenGL REQUIRED)

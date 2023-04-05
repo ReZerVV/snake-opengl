@@ -1,12 +1,19 @@
 #include "shader.hpp"
 
 // Create shader program with vertex and fragment shader.
-shader::shader(const std::string vertex_path, const std::string fragment_path) {
+shader::shader(const std::string vertex_path, const std::string fragment_path, const std::string geometry_path) {
     GLuint shader_vertex = compile_shader_from_source(load_source_from_file(vertex_path), GL_VERTEX_SHADER);
     GLuint shader_fragment = compile_shader_from_source(load_source_from_file(fragment_path), GL_FRAGMENT_SHADER);
+    GLuint shader_geometry;
+    if (!geometry_path.empty()) {
+    	shader_geometry = compile_shader_from_source(load_source_from_file(geometry_path), GL_GEOMETRY_SHADER);
+    }
 	this->program = glCreateProgram();
 	glAttachShader(program, shader_vertex);
 	glAttachShader(program, shader_fragment);
+	if (!geometry_path.empty()) {
+		glAttachShader(program, shader_geometry);
+	}
 	glLinkProgram(program);
 	int success;
 	glGetProgramiv(program, GL_LINK_STATUS, &success);

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/snake.dir/source/main.cpp.o.d"
   "CMakeFiles/snake.dir/source/map.cpp.o"
   "CMakeFiles/snake.dir/source/map.cpp.o.d"
+  "CMakeFiles/snake.dir/source/shader.cpp.o"
+  "CMakeFiles/snake.dir/source/shader.cpp.o.d"
   "CMakeFiles/snake.dir/source/snake.cpp.o"
   "CMakeFiles/snake.dir/source/snake.cpp.o.d"
   "snake"

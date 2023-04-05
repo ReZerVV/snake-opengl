@@ -11,7 +11,7 @@ class shader
 {
 public:
 	GLuint program;
-    shader(const std::string vertex_path, const std::string fragment_path);
+    shader(const std::string vertex_path, const std::string fragment_path, const std::string geometry_path = std::string());
 private:
     std::string load_source_from_file(const std::string &path);
     GLuint compile_shader_from_source(const std::string &source, const GLuint SHADER_TYPE);

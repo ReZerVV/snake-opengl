@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cyril/Programming/snake/source/food.cpp" "CMakeFiles/snake.dir/source/food.cpp.o" "gcc" "CMakeFiles/snake.dir/source/food.cpp.o.d"
   "/home/cyril/Programming/snake/source/main.cpp" "CMakeFiles/snake.dir/source/main.cpp.o" "gcc" "CMakeFiles/snake.dir/source/main.cpp.o.d"
   "/home/cyril/Programming/snake/source/map.cpp" "CMakeFiles/snake.dir/source/map.cpp.o" "gcc" "CMakeFiles/snake.dir/source/map.cpp.o.d"
+  "/home/cyril/Programming/snake/source/shader.cpp" "CMakeFiles/snake.dir/source/shader.cpp.o" "gcc" "CMakeFiles/snake.dir/source/shader.cpp.o.d"
   "/home/cyril/Programming/snake/source/snake.cpp" "CMakeFiles/snake.dir/source/snake.cpp.o" "gcc" "CMakeFiles/snake.dir/source/snake.cpp.o.d"
   )
 

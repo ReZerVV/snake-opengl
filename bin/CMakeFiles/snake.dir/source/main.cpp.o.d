@@ -267,4 +267,10 @@ CMakeFiles/snake.dir/source/main.cpp.o: \
  /usr/include/c++/12.2.1/bits/stl_bvector.h \
  /usr/include/c++/12.2.1/bits/vector.tcc \
  /home/cyril/Programming/snake/include/food.hpp \
- /home/cyril/Programming/snake/include/map.hpp
+ /home/cyril/Programming/snake/include/map.hpp \
+ /home/cyril/Programming/snake/include/shader.hpp \
+ /usr/include/c++/12.2.1/fstream /usr/include/c++/12.2.1/bits/codecvt.h \
+ /usr/include/c++/12.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/12.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/12.2.1/bits/fstream.tcc /usr/include/c++/12.2.1/sstream \
+ /usr/include/c++/12.2.1/bits/sstream.tcc
