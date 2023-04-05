@@ -129,6 +129,30 @@ snake/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/build
 .PHONY : snake/fast
 
+source/controller.o: source/controller.cpp.o
+.PHONY : source/controller.o
+
+# target to build an object file
+source/controller.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/controller.cpp.o
+.PHONY : source/controller.cpp.o
+
+source/controller.i: source/controller.cpp.i
+.PHONY : source/controller.i
+
+# target to preprocess a source file
+source/controller.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/controller.cpp.i
+.PHONY : source/controller.cpp.i
+
+source/controller.s: source/controller.cpp.s
+.PHONY : source/controller.s
+
+# target to generate assembly for a file
+source/controller.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/controller.cpp.s
+.PHONY : source/controller.cpp.s
+
 source/food.o: source/food.cpp.o
 .PHONY : source/food.o
 
@@ -177,6 +201,30 @@ source/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
+source/map.o: source/map.cpp.o
+.PHONY : source/map.o
+
+# target to build an object file
+source/map.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/map.cpp.o
+.PHONY : source/map.cpp.o
+
+source/map.i: source/map.cpp.i
+.PHONY : source/map.i
+
+# target to preprocess a source file
+source/map.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/map.cpp.i
+.PHONY : source/map.cpp.i
+
+source/map.s: source/map.cpp.s
+.PHONY : source/map.s
+
+# target to generate assembly for a file
+source/map.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/map.cpp.s
+.PHONY : source/map.cpp.s
+
 source/snake.o: source/snake.cpp.o
 .PHONY : source/snake.o
 
@@ -210,12 +258,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... snake"
+	@echo "... source/controller.o"
+	@echo "... source/controller.i"
+	@echo "... source/controller.s"
 	@echo "... source/food.o"
 	@echo "... source/food.i"
 	@echo "... source/food.s"
 	@echo "... source/main.o"
 	@echo "... source/main.i"
 	@echo "... source/main.s"
+	@echo "... source/map.o"
+	@echo "... source/map.i"
+	@echo "... source/map.s"
 	@echo "... source/snake.o"
 	@echo "... source/snake.i"
 	@echo "... source/snake.s"
