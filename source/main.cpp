@@ -7,6 +7,8 @@
 controller _controller;
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 
+GLuint generate_mesh();
+
 int WIN_WIDTH, WIN_HEIGHT;
 int main() {
 // Initialize.
@@ -35,6 +37,8 @@ int main() {
 	glViewport(0, 0, WIN_WIDTH, WIN_HEIGHT);
 	glfwSetKeyCallback(window, key_callback);
 
+	GLuint mesh = generate_mesh();
+
 	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
 		_controller.input_update();
@@ -62,4 +66,32 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
             _controller._keys[key] = false;
         }
     }
+}
+
+GLuint generate_mesh() {
+	GLfloat vertex[] = {
+		-0.5f, -0.5f, 0.0f,		1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.0f,		1.0f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.0f,		1.0f, 1.0f, 1.0f,
+		0.5f, 0.0f, 0.0f,		1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 0.0f,		1.0f, 1.0f, 1.0f,
+	};
+	GLuint vbo, mesh;
+	glGenVertexArrays(1, &mesh);
+	glGenBuffers(1, &vbo);
+
+	glBindVertexArray(mesh);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	return mesh;
 }
