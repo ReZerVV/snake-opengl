@@ -1,1 +1,1 @@
-/usr/bin/c++ -rdynamic CMakeFiles/snake.dir/source/main.cpp.o -o snake  /usr/lib/libGL.so /usr/lib/libGLEW.so -lglfw -lX11 -lXrandr -lXi 
+/usr/bin/c++ -rdynamic CMakeFiles/snake.dir/source/main.cpp.o CMakeFiles/snake.dir/source/snake.cpp.o CMakeFiles/snake.dir/source/food.cpp.o -o snake  /usr/lib/libGL.so /usr/lib/libGLEW.so -lglfw -lX11 -lXrandr -lXi 

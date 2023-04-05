@@ -19,7 +19,7 @@ public:
 	}
 public:
 	std::vector<glm::vec2> 	_body;
-	std::vec2 				_direction;
+	glm::vec2 				_direction;
 	size_t 					_points;
 };
 

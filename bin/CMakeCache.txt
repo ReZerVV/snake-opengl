@@ -252,6 +252,9 @@ PKG_CONFIG_ARGN:STRING=
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
+//The directory containing a CMake configuration file for glm.
+glm_DIR:PATH=/usr/lib/cmake/glm
+
 //Path to a library.
 pkgcfg_lib_GLFW_glfw:FILEPATH=/usr/lib/libglfw.so
 

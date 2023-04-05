@@ -129,6 +129,30 @@ snake/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/build
 .PHONY : snake/fast
 
+source/food.o: source/food.cpp.o
+.PHONY : source/food.o
+
+# target to build an object file
+source/food.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/food.cpp.o
+.PHONY : source/food.cpp.o
+
+source/food.i: source/food.cpp.i
+.PHONY : source/food.i
+
+# target to preprocess a source file
+source/food.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/food.cpp.i
+.PHONY : source/food.cpp.i
+
+source/food.s: source/food.cpp.s
+.PHONY : source/food.s
+
+# target to generate assembly for a file
+source/food.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/food.cpp.s
+.PHONY : source/food.cpp.s
+
 source/main.o: source/main.cpp.o
 .PHONY : source/main.o
 
@@ -153,6 +177,30 @@ source/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
+source/snake.o: source/snake.cpp.o
+.PHONY : source/snake.o
+
+# target to build an object file
+source/snake.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/snake.cpp.o
+.PHONY : source/snake.cpp.o
+
+source/snake.i: source/snake.cpp.i
+.PHONY : source/snake.i
+
+# target to preprocess a source file
+source/snake.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/snake.cpp.i
+.PHONY : source/snake.cpp.i
+
+source/snake.s: source/snake.cpp.s
+.PHONY : source/snake.s
+
+# target to generate assembly for a file
+source/snake.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snake.dir/build.make CMakeFiles/snake.dir/source/snake.cpp.s
+.PHONY : source/snake.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +210,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... snake"
+	@echo "... source/food.o"
+	@echo "... source/food.i"
+	@echo "... source/food.s"
 	@echo "... source/main.o"
 	@echo "... source/main.i"
 	@echo "... source/main.s"
+	@echo "... source/snake.o"
+	@echo "... source/snake.i"
+	@echo "... source/snake.s"
 .PHONY : help
 
 

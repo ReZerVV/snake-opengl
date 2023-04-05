@@ -6,3 +6,7 @@ snake::snake()
 	_points(0) {
 	this->_body.push_back(glm::vec2(0.0f, 0.0f));
 }
+
+snake::~snake() {
+
+}
