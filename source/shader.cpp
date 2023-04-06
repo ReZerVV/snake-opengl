@@ -24,6 +24,7 @@ shader::shader(const std::string vertex_path, const std::string fragment_path, c
 	}
 	glDeleteShader(shader_vertex);
 	glDeleteShader(shader_fragment);
+	glDeleteShader(shader_geometry);
 }
 
 // Load souce shader from file.

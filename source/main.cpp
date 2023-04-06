@@ -2,15 +2,19 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include "map.hpp"
 #include "controller.hpp"
 #include "shader.hpp"
 
-controller _controller;
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
+map _map(20, 20);
+snake _snake;
+controller _controller(&_map, &_snake);
 
-GLuint lenght;
-GLuint generate_mesh();
-float cell_width = 100.0f, cell_height = 100.0f;
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
+GLuint generate_cell();
+
 int WIN_WIDTH, WIN_HEIGHT;
 int main() {
 // Initialize.
@@ -23,7 +27,7 @@ int main() {
 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(800, 800, "LearnOpenGL", nullptr, nullptr);
 	if (window == nullptr) {
 		std::cout << "[ERROR::GLFW::WINDOW] Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -38,28 +42,62 @@ int main() {
 	glfwGetFramebufferSize(window, &WIN_WIDTH, &WIN_HEIGHT);  
 	glViewport(0, 0, WIN_WIDTH, WIN_HEIGHT);
 	glfwSetKeyCallback(window, key_callback);
-
-	cell_width = cell_width / WIN_WIDTH;
-	cell_height = cell_height / WIN_HEIGHT;
-	GLuint mesh = generate_mesh();
-	shader _shader(
-		"/home/cyril/Programming/snake/shader/mesh.vert",
-		"/home/cyril/Programming/snake/shader/mesh.frag",
-		"/home/cyril/Programming/snake/shader/mesh.geom"
+	
+	shader shader_snake (
+		"/home/cyril/Programming/snake/shader/snake_vert.glsl",
+		"/home/cyril/Programming/snake/shader/snake_frag.glsl"
 	);
 
+	GLuint cell = generate_cell();
+	GLfloat time_now = glfwGetTime();
+	GLfloat time_last = glfwGetTime();
+	GLfloat delta_time = 0.0f, time_sum = 0.0f;
 	while(!glfwWindowShouldClose(window)) {
+		
+		time_now = glfwGetTime();
+		delta_time = time_now - time_last;
+		time_last = time_now;
+		time_sum += delta_time;
 		glfwPollEvents();
-		_controller.input_update();
-		_controller.update();
+		if (time_sum >= 1.0f / 16) {
+			time_sum = 0.0f;
+			_controller.input_update();
+			_controller.update();
+		}
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(_shader.program);
-		glUniform2f(glGetUniformLocation(_shader.program, "cell_size"), cell_width - 0.02, cell_height - 0.02);
-	    glBindVertexArray(mesh);
-	    glDrawArrays(GL_POINTS, 0, lenght);
-        glBindVertexArray(0);
+		glBindVertexArray(cell);
+			glUseProgram(shader_snake.program);
+			glUniform2f(
+				glGetUniformLocation(shader_snake.program, "map_size"),
+				_map._width,
+				_map._height
+			);
+			for (int i = 0; i < _snake._body.size(); ++i) {
+				glUniform3f(
+					glGetUniformLocation(shader_snake.program, "color"),
+					0.0f, 1.0f, 0.5f
+				);
+				glUniform2fv(
+					glGetUniformLocation(shader_snake.program, "position"),
+					1,
+					glm::value_ptr(_snake._body[i])
+				);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+			}
+			glUniform3f(
+				glGetUniformLocation(shader_snake.program, "color"),
+				1.0f, 0.0f, 0.5f
+			);
+			glUniform2fv(
+				glGetUniformLocation(shader_snake.program, "position"),
+				1,
+				glm::value_ptr(_controller._food._position)
+				//glm::value_ptr(glm::vec2(50, 50))
+			);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+		glBindVertexArray(0);
 
 	    glfwSwapBuffers(window);
 	}
@@ -84,35 +122,38 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     }
 }
 
-GLuint generate_mesh() {
-	std::vector<glm::vec3> vertex;
+// Generate cell.
+GLuint generate_cell() {
+	GLfloat vertices[] = {
+		0.0, 0.0,
+		0.0, 1.0,
+		1.0, 1.0,
+		1.0, 0.0
+	};
+	GLuint indices[] = {
+	  	0, 1, 2,
+  		2, 3, 0
+	};
 
-	_controller._map._width = 2.0f / cell_width;
-	_controller._map._height = 2.0f / cell_height;
-	for (int j = 0; j < _controller._map._height; j++) {
-    	for (int i = 0; i < _controller._map._width; i++) {
-			GLfloat x = (float)i / (float)_controller._map._width;
-			GLfloat y = (float)j / (float)_controller._map._height;
-			vertex.push_back(glm::vec3(x * 2.0f - 1.0f, y * 2.0f - 1.0f, 0.0f));
-		}
-	}
-	lenght = (GLuint)vertex.size();
+	GLuint vbo, ebo, cell;
 
-	GLuint vbo, mesh;
-	glGenVertexArrays(1, &mesh);
+	glGenVertexArrays(1, &cell);
+	glBindVertexArray(cell);
+	
+	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	// end
+
 	glGenBuffers(1, &vbo);
-
-	glBindVertexArray(mesh);
-
-
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, vertex.size()*sizeof(glm::vec3), &vertex.front(), GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)0);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	// end
+	
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2, (void*)0);
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
-	return mesh;
+	return cell;
 }

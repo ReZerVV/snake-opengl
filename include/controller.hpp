@@ -9,7 +9,7 @@
 
 class controller {
 public:
-	controller();
+	controller(map *map, snake *snake);
 	controller(const controller&) = default;
 	controller(controller&&) = default;
 	~controller();
@@ -17,11 +17,11 @@ public:
 	void input_update();
 	void update();
 private:
-	glm::vec2 generate_food_position();
+	void generate_food_position();
 public:
 	bool 								_keys[1024];
-	map 								_map;
-	snake 								_snake;
+	map 								*_map;
+	snake 								*_snake;
 	food  								_food;
 };
 
